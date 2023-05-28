@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block title %} Tables DT Basic {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+    <!-- data tables css -->
+    <link rel="stylesheet" href="{{ ASSETS_ROOT }}/css/plugins/dataTables.bootstrap5.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}	
+    
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5 class="m-b-10">Basic Initialization</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="/"><i
+                                                        class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#!">Data Table</a></li>
+                                            <li class="breadcrumb-item">Basic Initialization</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ breadcrumb ] end -->
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- Zero config table start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Zero Configuration</h5>
+                                        <small>DataTables has most features enabled by default, so all you need to do to
+                                            use it with your own tables is to call the construction function.</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="dt-responsive table-responsive">
+                                            {% render_table table %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                       
+                            <!-- Zero config table end -->
+                            <!-- Language - Comma Decimal Place table end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- datatable Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/jquery.dataTables.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/dataTables.bootstrap5.min.js"></script>
+<script>
+    // [ Zero Configuration ] start
+    $('#simpletable').DataTable();
+
+</script>
+
+{% endblock javascripts %}
