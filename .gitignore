@@ -1,3 +1,5 @@
+# data prep
+data_prep/data
 
 # Database
 db.sqlite3
@@ -9,5 +11,7 @@ __pycache__/
 **/.DS_Store
 .DS_Store
 
+
+# vscode files
 .devcontainer/
 .vscode/
