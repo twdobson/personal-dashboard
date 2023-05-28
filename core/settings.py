@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "debug_toolbar", # see django-debug toolbar docs https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+    'django_tables2',
     'apps.home',  # Enable the inner home (home)
     "apps.polls",
     'apps.authentication',
@@ -61,6 +63,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -202,10 +205,15 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 SERVER = env('SERVER', default='127.0.0.1')
 
-if DEBUG:
-    ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if sys.argv[1] == 'runserver' else 'https'
-else:
-    ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'  # assumed production http protocol is https
+# if DEBUG:
+#     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if sys.argv[1] == 'runserver' else 'https'
+
+#     # Required for django-debug toolbar
+#     import socket  # only if you haven't already imported this
+#     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+#     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+# else:
+#     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'  # assumed production http protocol is https
 
 
 SOCIALACCOUNT_PROVIDERS = {}
@@ -225,3 +233,7 @@ if TWITTER_AUTH:
             'key': ''
         }
     }
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]    

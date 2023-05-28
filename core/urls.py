@@ -9,6 +9,7 @@ from django.urls import path, include  # add this
 urlpatterns = [
     path(route='admin/', view=admin.site.urls),          # Django admin route
     path(route="", view=include("apps.authentication.urls")), # Auth routes - login / register
+    path('__debug__/', include('debug_toolbar.urls')),
 
     # ADD NEW Routes HERE
     path(route="polls/", view=include("apps.polls.urls")),
