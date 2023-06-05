@@ -85,3 +85,90 @@ fig.show()
 
 
 
+# --------------------------------------------------
+
+from highcharts import Highmap, Highcharts
+
+# Create the main map
+chart = Highmap()
+chart.set_options('chart', {
+    'map': 'custom/world',
+    'drilldown': {
+        'activeDataLabelStyle': {
+            'color': '#FFFFFF',
+            'cursor': 'pointer',
+            'fontWeight': 'bold',
+            'textDecoration': 'underline'
+        },
+        'drillUpButton': {
+            'relativeTo': 'spacingBox',
+            'position': {
+                'x': 0,
+                'y': 60
+            }
+        }
+    }
+})
+
+# Add the drilldown series
+series_data = [
+    {
+        'name': 'Asia',
+        'id': 'asia',
+        'data': [
+            ['in', 100],
+            ['jp', 200],
+            ['cn', 300]
+        ]
+    },
+    {
+        'name': 'Europe',
+        'id': 'europe',
+        'data': [
+            ['de', 400],
+            ['fr', 500],
+            ['uk', 600]
+        ]
+    }
+]
+
+chart.add_drilldown_series(series_data)
+
+# Configure drilldown data
+drilldown_data = {
+    'asia': {
+        'name': 'Asia',
+        'data': [
+            ['in-ka', 50],
+            ['in-mh', 70],
+            ['jp-tk', 80],
+            ['jp-ty', 120],
+            ['cn-sh', 180],
+            ['cn-bj', 120]
+        ]
+    },
+    'europe': {
+        'name': 'Europe',
+        'data': [
+            ['de-be', 80],
+            ['de-by', 100],
+            ['fr-idf', 110],
+            ['fr-vd', 150],
+            ['uk-en', 160],
+            ['uk-sc', 190]
+        ]
+    }
+}
+
+chart.add_drilldown_data(drilldown_data)
+
+# Set the chart title and subtitle
+chart.set_title('Drilldown Map')
+chart.set_subtitle('Click a region to view details')
+
+# Set the tooltip and color axis
+chart.set_options('tooltip', {'enabled': True})
+chart.set_options('colorAxis', {'min': 0, 'max': 600})
+
+# Render the chart
+chart.htmlcontent

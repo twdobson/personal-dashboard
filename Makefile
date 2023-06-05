@@ -16,5 +16,13 @@ migrate:
 	python manage.py makemigrations
 	python manage.py makemigrations accounts
 	python manage.py makemigrations authentication
+	python manage.py makemigrations pastebin
 	python manage.py migrate
 
+.PHONY: shell
+shell:
+	python manage.py shell
+
+.PHONY: create-super-user
+create-super-user:
+	python manage.py createsuperuser	

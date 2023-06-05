@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "debug_toolbar", # see django-debug toolbar docs https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+    'rest_framework', # https://www.django-rest-framework.org
+    'debug_toolbar', # see django-debug toolbar docs https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
     'django_tables2',
     'apps.home',  # Enable the inner home (home)
-    "apps.polls",
+    'apps.polls',
+    'apps.pastebin',
     'apps.authentication',
     'apps.accounts',
     'django.contrib.sites',
@@ -97,6 +99,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+
+# -----------------------------------------------------------------------------
+# Rest framework
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    # ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+# -----------------------------------------------------------------------------
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -199,7 +215,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 4
+SITE_ID = 5
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
