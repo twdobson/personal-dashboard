@@ -27,7 +27,6 @@ app_name = "pastebin"
 # # The API URLs are now determined automatically by the router.
 # urlpatterns = [
 #     path('', include(router.urls)),
-    
 # ]
 
 
@@ -109,4 +108,8 @@ urlpatterns = [
     # path('users/<int:pk>/', views.UserDetail.as_view()),
     # path('snippets/<int:pk>/highlight/', views.SnippetHighlight.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns=urlpatterns)
+
+
 

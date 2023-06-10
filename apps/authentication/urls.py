@@ -14,5 +14,4 @@ urlpatterns = [
     path("change_password/", change_password, name="change-password"),
     path("delete_account/", delete_account, name="delete-account"),
     path('social_login/', include('allauth.urls')),
-
 ]
