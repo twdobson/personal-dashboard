@@ -41,35 +41,35 @@ def api_root(request, format=None):
     })
 
 
-# class SnippetViewSet(viewsets.ModelViewSet):
-#     """
-#     This viewset automatically provides `list`, `create`, `retrieve`,
-#     `update` and `destroy` actions.
+class SnippetViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
 
-#     Additionally we also provide an extra `highlight` action.
-#     """
-#     queryset = Snippet.objects.all()
-#     serializer_class = SnippetSerializer
-#     permission_classes = [
-#         permissions.IsAuthenticatedOrReadOnly,
-#         IsOwnerOrReadOnly
-#     ]
-#     # lookup_field='id'
+    Additionally we also provide an extra `highlight` action.
+    """
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    ]
+    # lookup_field='id'
 
-#     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-#     def highlight(self, request, *args, **kwargs):
-#         snippet = self.get_object()
-#         return Response(snippet.highlighted)
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    def highlight(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
 
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
-# class UserViewSet(viewsets.ReadOnlyModelViewSet):
-#     """
-#     This viewset automatically provides `list` and `retrieve` actions.
-#     """
-#     queryset = CustomUser.objects.all()
-#     serializer_class = UserSerializer
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve` actions.
+    """
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
 
 # -------------
 
@@ -86,28 +86,28 @@ class SnippetHighlight(generics.GenericAPIView):
 
 # --------------
 
-class UserList(generics.ListAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+# class UserList(generics.ListAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = UserSerializer
 
 
-class UserDetail(generics.RetrieveAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+# class UserDetail(generics.RetrieveAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = UserSerializer
 
 
 
 
 # ---------------
 
-class SnippetList(generics.ListCreateAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+# class SnippetList(generics.ListCreateAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
 
 # class SnippetList(generics.ListCreateAPIView):
 #     queryset = Snippet.objects.all()
@@ -221,13 +221,13 @@ class SnippetList(generics.ListCreateAPIView):
 #         IsOwnerOrReadOnly
 #     ]
 
-class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly
-    ]  
+# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#     permission_classes = [
+#         permissions.IsAuthenticatedOrReadOnly,
+#         IsOwnerOrReadOnly
+#     ]  
 
 
 # class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
