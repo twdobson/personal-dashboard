@@ -30,8 +30,10 @@ urlpatterns = [
     # path('api/', view=include('pastebin.urls', namespace='pastebin')),
 
     # If you're intending to use the browsable API you'll probably also want to add REST framework's login and logout views
-    path('api/', include(router.urls)),
     path('api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # TD test
+    path('api/', include(router.urls)),
 
 
     # Leave `Home.Urls` as last the last line

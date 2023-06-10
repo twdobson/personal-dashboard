@@ -30,6 +30,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework_csv.renderers import CSVRenderer
+from .serializers import UserSerializer
 
 
 # @api_view(['GET'])
@@ -89,33 +90,43 @@ from rest_framework_csv.renderers import CSVRenderer
 
 # --------------
 
-# class UserList(generics.ListAPIView):
-#     queryset = CustomUser.objects.all()
-#     serializer_class = UserSerializer
+class UserList(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
 
 
-# class UserDetail(generics.RetrieveAPIView):
-#     queryset = CustomUser.objects.all()
-#     serializer_class = UserSerializer
+class UserDetail(generics.RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
 
 
 
 
 # ---------------
 
+class SnippetList(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 # class SnippetList(generics.ListCreateAPIView):
 #     queryset = Snippet.objects.all()
 #     serializer_class = SnippetSerializer
 
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
 #     def perform_create(self, serializer):
+#         """
+#         overwrite the `perform_create` function which is by default serializer.save()
+#         """
 #         serializer.save(owner=self.request.user)
         
 
-class SnippetList(generics.ListCreateAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+# class SnippetList(generics.ListCreateAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
 
 # class SnippetList(
 #         mixins.ListModelMixin,
@@ -214,12 +225,20 @@ class SnippetList(generics.ListCreateAPIView):
 #         IsOwnerOrReadOnly
 #     ]
 
-
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    ]  
 
-    renderer_classes = [CSVRenderer]
+
+# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+
+#     renderer_classes = [CSVRenderer]
 
 # class SnippetDetail(
 #         mixins.RetrieveModelMixin,

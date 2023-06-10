@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_csv',
     'rest_framework', # https://www.django-rest-framework.org
     'debug_toolbar', # see django-debug toolbar docs https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
     'django_tables2',

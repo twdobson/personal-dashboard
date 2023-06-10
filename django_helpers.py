@@ -39,4 +39,10 @@ for pattern in url_patterns:
 # <URLPattern 'snippets/<int:pk><drf_format_suffix:format>'>
 
 
+# V3 - no difference
+# <URLPattern 'snippets/'>
+# <URLPattern 'snippets<drf_format_suffix_json_html_csv:format>'>
+# <URLPattern 'snippets/<int:pk>/'>
+# <URLPattern 'snippets/<int:pk><drf_format_suffix_json_html_csv:format>'>
+
 

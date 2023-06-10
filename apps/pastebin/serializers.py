@@ -2,7 +2,7 @@ from rest_framework import serializers
 from apps.pastebin.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 
 
-# from .. authentication.models import CustomUser
+from .. authentication.models import CustomUser
 
 
 # class SnippetSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,16 +47,16 @@ from apps.pastebin.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 #     class Meta:
 #         model = CustomUser
 #         fields = ['url', 'id', 'username', 'snippets']
+# from django.contrib.auth.models import User
+class UserSerializer(serializers.ModelSerializer):
+    snippets = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Snippet.objects.all()
+    )
 
-# class UserSerializer(serializers.ModelSerializer):
-#     snippets = serializers.PrimaryKeyRelatedField(
-#         many=True,
-#         queryset=Snippet.objects.all()
-#     )
-
-#     class Meta:
-#         model = CustomUser
-#         fields = ['id', 'username', 'snippets']
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'snippets']
 
         
 # class SnippetSerializer(serializers.ModelSerializer):
@@ -73,6 +73,8 @@ class SnippetSerializer(serializers.Serializer):
     linenos = serializers.BooleanField(required=False)
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
     style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     def create(self, validated_data):
         """
