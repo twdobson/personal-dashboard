@@ -13,7 +13,7 @@ from . import views
 
 # from .views import SnippetViewSet, UserViewSet, api_root
 from rest_framework import renderers
-from .views import snippet_list, snippet_detail
+# from .views import snippet_list, snippet_detail
 app_name = "pastebin"
 
 # Create a router and register our viewsets with it.
@@ -99,17 +99,17 @@ app_name = "pastebin"
 # ])
 
 urlpatterns = [
-    path('snippets/', views.snippet_list),
-    path('snippets/<int:pk>/', views.snippet_detail),
+    # path('snippets/', views.snippet_list),
+    # path('snippets/<int:pk>/', views.snippet_detail),
     # path('', views.api_root),
-    # path('snippets/', views.SnippetList.as_view()),
-    # path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
+    path('snippets/', views.SnippetList.as_view()),
+    path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
     # path('users/', views.UserList.as_view()),
     # path('users/<int:pk>/', views.UserDetail.as_view()),
     # path('snippets/<int:pk>/highlight/', views.SnippetHighlight.as_view()),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns=urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns=urlpatterns, allowed=['json', 'html', 'csv'])
 
 
 

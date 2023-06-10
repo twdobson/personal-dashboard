@@ -35,5 +35,5 @@ django-filter==23.2
 
 # Pastebin api example
 pygments==2.15.1 # We'll be using this for the code highlighting
-
+djangorestframework-csv==2.1.1
 # mysqlclient
