@@ -33,16 +33,12 @@ from rest_framework_csv.renderers import CSVRenderer
 from .serializers import UserSerializer
 
 
-# @api_view(['GET'])
-# def api_root(request, format=None):
-#     print("*"*100)
-#     print(reverse('user-list', request=request, format=format))
-#     print("*"*100)
-#     return Response({
-#         'users': reverse('user-list', request=request, format=format),
-#         'snippets': reverse('pastebin:snippet-list', request=request, format=format)
-#     })
-
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('pastebin:user-list', request=request, format=format),
+        'snippets': reverse('pastebin:snippet-list', request=request, format=format)
+    })
 
 
 # class SnippetViewSet(viewsets.ModelViewSet):
@@ -77,13 +73,13 @@ from .serializers import UserSerializer
 
 # -------------
 
-# class SnippetHighlight(generics.GenericAPIView):
-#     queryset = Snippet.objects.all()
-#     renderer_classes = [renderers.StaticHTMLRenderer]
+class SnippetHighlight(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = [renderers.StaticHTMLRenderer]
 
-#     def get(self, request, *args, **kwargs):
-#         snippet = self.get_object()
-#         return Response(snippet.highlighted)
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
 
 
 

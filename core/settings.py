@@ -216,7 +216,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 5
+SITE_ID = 7
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
